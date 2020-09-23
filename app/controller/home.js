@@ -10,6 +10,9 @@ let userCards = {
 
 let userIdIncrement = 0;
 
+// 跟牌的用户人数
+let optUsersNum = 0; 
+
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
@@ -51,16 +54,24 @@ class HomeController extends Controller {
     userIdIncrement = 0;
   }
 
-  async isFollowCard (uid, isGen) {
-    if (isGen) { // 跟牌
+  async isFollowCard (uid) {
+    const { ctx } = this;
+    if (isOpt) { // 跟牌
+      optUsersNum ++;
+      if (optUsersNum == joinUsers.length) {
+        this.pushCard(); // 发牌
+      }
       
     } else { // 不跟牌
-      const deleteIndex = curUserList.findIndex(item => {
+      const deleteIndex = joinUsers.findIndex(item => {
         return item === uid
       })
   
       // 删除不跟牌的用户
-      curUserList.splice(deleteIndex, 1)
+      joinUsers.splice(deleteIndex, 1);
+      ctx.body = {
+        curUserList: joinUsers
+      };
     }
   }
 }
