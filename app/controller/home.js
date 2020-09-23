@@ -8,8 +8,6 @@ let userCards = {
   public: []
 };
 
-let userIdIncrement = 0;
-
 // 跟牌的用户人数
 let optUsersNum = 0; 
 
@@ -21,24 +19,19 @@ class HomeController extends Controller {
 
   async startGame() {
     const { ctx } = this;
-    if (joinUsers.length >= 5) {
-      ctx.body = {
-        hasStart: true
-      };
-      return;
-    }
-    const userId = ctx.query.userId || ++userIdIncrement;
-    userCards[userId] = [];
-    if (!joinUsers.includes(userId)) {
-      joinUsers.push(userId);
+    const userId = ctx.query.userId;
+    if (joinUsers.length < 5) {
+      userCards[userId] = [];
+      if (!joinUsers.includes(userId)) {
+        joinUsers.push(userId);
+      }
     }
     ctx.body = {
       userId,
       hasStart: joinUsers.length >= 5,
       curUserList: joinUsers,
       publicCards: [],
-      priList: [],
-      isNeed
+      priList: []
     };
   }
 
