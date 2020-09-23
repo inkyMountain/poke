@@ -52,9 +52,11 @@ class HomeController extends Controller {
       public: []
     };
     userIdIncrement = 0;
+    optUsersNum = 0;
   }
 
   async isFollowCard (uid) {
+    console.log(111111);
     const { ctx } = this;
     if (isOpt) { // 跟牌
       optUsersNum ++;
