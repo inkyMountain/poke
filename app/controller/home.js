@@ -44,6 +44,7 @@ class HomeController extends Controller {
 
   async isOpt() {
     const { ctx } = this;
+    ctx.body = 'hi, egg1';
   }
 
   async resetUsers() {
@@ -56,7 +57,6 @@ class HomeController extends Controller {
   }
 
   async isFollowCard (uid) {
-    console.log(111111);
     const { ctx } = this;
     if (isOpt) { // 跟牌
       optUsersNum ++;
@@ -76,6 +76,7 @@ class HomeController extends Controller {
       };
     }
   }
+
 }
 
 module.exports = HomeController;
