@@ -50,6 +50,19 @@ class HomeController extends Controller {
     };
     userIdIncrement = 0;
   }
+
+  async isFollowCard (uid, isGen) {
+    if (isGen) { // 跟牌
+      
+    } else { // 不跟牌
+      const deleteIndex = curUserList.findIndex(item => {
+        return item === uid
+      })
+  
+      // 删除不跟牌的用户
+      curUserList.splice(deleteIndex, 1)
+    }
+  }
 }
 
 module.exports = HomeController;
